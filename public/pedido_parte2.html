@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido - Parte 2</title>
+    <style>
+        .pedido-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+        .pedido-container h1 {
+            margin-bottom: 20px;
+        }
+        .pedido-container .separator {
+            width: 100%;
+            height: 2px;
+            background-color: #ccc;
+            margin: 20px 0;
+        }
+        .pedido-container form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .pedido-container label, .pedido-container input, .pedido-container button, .pedido-container select, .pedido-container textarea {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        .pedido-container button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .pedido-container button:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <!-- Adicionando o script EmailJS -->
+    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function(){
+            emailjs.init("UQLibTs44FKjk4iM_"); // Substitua pela sua Public Key do EmailJS
+        })();
+    </script>
+</head>
+<body class="pedido-page">
+    <div class="pedido-container" id="pedidoContainer">
+        <h1>Dados do Pedido</h1>
+        <p>Data do Pedido: <span id="dataPedido"></span></p>
+        <p>Número do Pedido: <span id="numeroPedido"></span></p>
+        <p>Nome do Cliente: <span id="nomeCliente"></span></p>
+        <div class="separator"></div>
+        <p>Usuário: <span id="emailCliente"></span></p>
+        <p>Senha: <span id="senhaCliente"></span></p>
+        <div class="separator"></div>
+        
+        <form id="pedidoParte2Form">
+            <label for="ambiente">Ambiente</label>
+            <input type="text" id="ambiente" required maxlength="30">
+            
+            <label for="tecido">Tecido</label>
+            <input type="text" id="tecido" required maxlength="50">
+            
+            <label for="larguraBruta">Largura Bruta</label>
+            <input type="text" id="larguraBruta" required maxlength="30">
+            
+            <label for="alturaBruta">Altura Bruta</label>
+            <input type="text" id="alturaBruta" required maxlength="30">
+            
+            <label for="larguraFinal">Largura Final</label>
+            <input type="text" id="larguraFinal" required maxlength="30">
+            
+            <label for="alturaFinal">Altura Final</label>
+            <input type="text" id="alturaFinal" required maxlength="30">
+            
+            <label for="abertura">Abertura</label>
+            <select id="abertura" required>
+                <option value="Central">Central</option>
+                <option value="Lateral">Lateral</option>
+            </select>
+            
+            <label for="modelo">Modelo</label>
+            <input type="text" id="modelo" required maxlength="50">
+            
+            <label for="bainha">Bainha</label>
+            <input type="text" id="bainha" required maxlength="50">
+            
+            <label for="trilho">Trilho</label>
+            <input type="text" id="trilho" required maxlength="50">
+            
+            <label for="observacoes">Observações</label>
+            <textarea id="observacoes" maxlength="250"></textarea>
+            
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+
+    <script>
+        // Obtém os dados do localStorage e preenche os campos
+        const dataPedido = localStorage.getItem('dataPedido');
+        const numeroPedido = localStorage.getItem('numeroPedido');
+        const nomeCliente = localStorage.getItem('nomeCliente');
+        const emailCliente = localStorage.getItem('userEmail');
+        const senhaCliente = localStorage.getItem('userPassword');
+
+        document.getElementById('dataPedido').innerText = dataPedido;
+        document.getElementById('numeroPedido').innerText = numeroPedido;
+        document.getElementById('nomeCliente').innerText = nomeCliente;
+        document.getElementById('emailCliente').innerText = emailCliente;
+        document.getElementById('senhaCliente').innerText = senhaCliente;
+
+        // Adiciona um listener ao formulário para o envio
+        document.getElementById("pedidoParte2Form").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const emailContent = {
+                data_pedido: dataPedido,
+                numero_pedido: numeroPedido,
+                nome_cliente: nomeCliente,
+                email_cliente: emailCliente,
+                senha_cliente: senhaCliente,
+                ambiente: document.getElementById('ambiente').value,
+                tecido: document.getElementById('tecido').value,
+                largura_bruta: document.getElementById('larguraBruta').value,
+                altura_bruta: document.getElementById('alturaBruta').value,
+                largura_final: document.getElementById('larguraFinal').value,
+                altura_final: document.getElementById('alturaFinal').value,
+                abertura: document.getElementById('abertura').value,
+                modelo: document.getElementById('modelo').value,
+                bainha: document.getElementById('bainha').value,
+                trilho: document.getElementById('trilho').value,
+                observacoes: document.getElementById('observacoes').value
+            };
+
+            // Salva os dados no localStorage para exibição no resumo
+            localStorage.setItem('ambiente', emailContent.ambiente);
+            localStorage.setItem('tecido', emailContent.tecido);
+            localStorage.setItem('larguraBruta', emailContent.largura_bruta);
+            localStorage.setItem('alturaBruta', emailContent.altura_bruta);
+            localStorage.setItem('larguraFinal', emailContent.largura_final);
+            localStorage.setItem('alturaFinal', emailContent.altura_final);
+            localStorage.setItem('abertura', emailContent.abertura);
+            localStorage.setItem('modelo', emailContent.modelo);
+            localStorage.setItem('bainha', emailContent.bainha);
+            localStorage.setItem('trilho', emailContent.trilho);
+            localStorage.setItem('observacoes', emailContent.observacoes);
+
+            // Envia o e-mail para os administradores
+            emailjs.send("service_hjue7ur", "template_68y0qyb", emailContent)
+                .then(function(response) {
+                    console.log("SUCCESS!", response.status, response.text);
+                }, function(error) {
+                    console.log("FAILED...", error);
+                });
+
+            // Redireciona para a página de resumo do pedido
+            window.location.href = 'pedido_resumo.html';
+        });
+    </script>
+</body>
+</html>

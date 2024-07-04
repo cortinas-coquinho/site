@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumo do Pedido</title>
+    <style>
+        .print-section {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+        .print-section h2 {
+            margin-bottom: 20px;
+        }
+        .print-section .separator {
+            width: 100%;
+            height: 2px;
+            background-color: #ccc;
+            margin: 20px 0;
+        }
+        .print-buttons {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+        .print-buttons button {
+            width: 48%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .print-buttons button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="print-section" id="printSection">
+        <h2>Resumo do Pedido</h2>
+        <p>Data do Pedido: <span id="dataPedido"></span></p>
+        <p>Número do Pedido: <span id="numeroPedido"></span></p>
+        <p>Nome do Cliente: <span id="nomeCliente"></span></p>
+        <div class="separator"></div>
+        <p>Usuário: <span id="emailCliente"></span></p>
+        <p>Senha: <span id="senhaCliente"></span></p>
+        <div class="separator"></div>
+        <p>Ambiente: <span id="ambiente"></span></p>
+        <p>Tecido: <span id="tecido"></span></p>
+        <p>Largura Bruta: <span id="larguraBruta"></span></p>
+        <p>Altura Bruta: <span id="alturaBruta"></span></p>
+        <p>Largura Final: <span id="larguraFinal"></span></p>
+        <p>Altura Final: <span id="alturaFinal"></span></p>
+        <p>Abertura: <span id="abertura"></span></p>
+        <p>Modelo: <span id="modelo"></span></p>
+        <p>Bainha: <span id="bainha"></span></p>
+        <p>Trilho: <span id="trilho"></span></p>
+        <p>Observações: <span id="observacoes"></span></p>
+        <div class="separator"></div>
+        <div class="print-message">
+            Pedido enviado! Imprima seu pedido e finalize para mais opções.
+        </div>
+	<div class="separator"></div>
+	<div class="print-buttons">
+            <button onclick="window.print()">Imprimir</button>
+            <button onclick="window.location.href='pedido_finalizado.html';">Finalizar</button>
+        </div>
+    </div>
+
+    <script>
+        // Obtém os dados do localStorage
+        document.getElementById('dataPedido').innerText = localStorage.getItem('dataPedido');
+        document.getElementById('numeroPedido').innerText = localStorage.getItem('numeroPedido');
+        document.getElementById('nomeCliente').innerText = localStorage.getItem('nomeCliente');
+        document.getElementById('emailCliente').innerText = localStorage.getItem('userEmail');
+        document.getElementById('senhaCliente').innerText = localStorage.getItem('userPassword');
+        document.getElementById('ambiente').innerText = localStorage.getItem('ambiente');
+        document.getElementById('tecido').innerText = localStorage.getItem('tecido');
+        document.getElementById('larguraBruta').innerText = localStorage.getItem('larguraBruta');
+        document.getElementById('alturaBruta').innerText = localStorage.getItem('alturaBruta');
+        document.getElementById('larguraFinal').innerText = localStorage.getItem('larguraFinal');
+        document.getElementById('alturaFinal').innerText = localStorage.getItem('alturaFinal');
+        document.getElementById('abertura').innerText = localStorage.getItem('abertura');
+        document.getElementById('modelo').innerText = localStorage.getItem('modelo');
+        document.getElementById('bainha').innerText = localStorage.getItem('bainha');
+        document.getElementById('trilho').innerText = localStorage.getItem('trilho');
+        document.getElementById('observacoes').innerText = localStorage.getItem('observacoes');
+    </script>
+</body>
+</html>

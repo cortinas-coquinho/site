@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido - Cortinas Coquinho</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .pedido-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+        .pedido-container h1 {
+            margin-bottom: 20px;
+        }
+        .pedido-container form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .pedido-container label, .pedido-container input, .pedido-container button {
+            width: 100%;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        .pedido-container button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .pedido-container button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body class="pedido-page">
+    <div class="pedido-container">
+        <h1>Faça o Pedido</h1>
+        <p>Você está logado como: <span id="user-email"></span></p>
+        <p>Telefone: <span id="user-password"></span></p>
+        <form id="pedidoForm">
+            <label for="dataPedido">Data do Pedido</label>
+            <input type="text" id="dataPedido" placeholder="dd/mm/aaaa" required pattern="\d{2}/\d{2}/2024">
+            
+            <label for="numeroPedido">Número do Pedido</label>
+            <input type="text" id="numeroPedido" placeholder="Número do Pedido" required maxlength="20">
+            
+            <label for="nomeCliente">Nome do Cliente</label>
+            <input type="text" id="nomeCliente" placeholder="Nome do Cliente" required maxlength="30">
+            
+            <button type="submit">Continuar</button>
+        </form>
+    </div>
+
+    <script>
+        // Recupera os dados do login
+        const email = localStorage.getItem('userEmail');
+        const password = localStorage.getItem('userPassword');
+
+        // Verifica se os dados de login estão presentes
+        if (!email || !password) {
+            alert('Você precisa estar logado para fazer um pedido.');
+            window.location.href = 'index.html';
+        } else {
+            // Exibe os dados na página
+            document.getElementById('user-email').innerText = email;
+            document.getElementById('user-password').innerText = password;
+        }
+
+        // Adiciona um listener ao formulário para o envio
+        document.getElementById("pedidoForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const dataPedido = document.getElementById('dataPedido').value;
+            const numeroPedido = document.getElementById('numeroPedido').value;
+            const nomeCliente = document.getElementById('nomeCliente').value;
+
+            // Armazena os dados da primeira parte do pedido
+            localStorage.setItem('dataPedido', dataPedido);
+            localStorage.setItem('numeroPedido', numeroPedido);
+            localStorage.setItem('nomeCliente', nomeCliente);
+
+            // Redireciona para a segunda parte do pedido
+            window.location.href = 'pedido_parte2.html';
+        });
+    </script>
+</body>
+</html>

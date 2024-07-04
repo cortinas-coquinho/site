@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido Finalizado</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .finalizado-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+        .finalizado-container h1 {
+            margin-bottom: 20px;
+        }
+        .finalizado-container button {
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .finalizado-container button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="finalizado-container">
+        <h1>Parabéns!</h1>
+        <p>Seu pedido foi enviado com sucesso. Aguarde o retorno da nossa equipe.</p>
+        <p>Estamos sempre trabalhando com a visão de melhorar no atendimento e na qualidade de nossos produtos!</p>
+        <p>A Equipe Cortinas Coquinho.</p>
+        <button onclick="novoPedido()">FAZER NOVO PEDIDO</button>
+        <button onclick="sair()">SAIR</button>
+    </div>
+
+    <script>
+        function novoPedido() {
+            window.location.href = 'pedido.html';
+        }
+
+        function sair() {
+            localStorage.clear();
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
